@@ -33,8 +33,10 @@
     Alert(:show='modalShow' @update:modalShow="modalShow = $event")
 </template>
 <script lang="ts">
-import { useDatabase, ref } from "@vueuse/firebase";
-import { getDatabase, ref as dbRef, set } from "firebase/database";
+//TODO:把中間設置跟Header移走好了
+//TODO:"your-data-path"
+//import { useDatabase, ref } from "@vueuse/firebase";
+import { getDatabase, ref as firebaseRef, set } from "firebase/database";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import RoleOptions from "@/interfaces/RoleOptionsInterface";
 import Role from "@/interfaces/RoleInterface";
@@ -55,7 +57,7 @@ import charactersData from "@/assets/data/characters.json";
 import script from "@/assets/data/script.json";
 import firebaseApp from '@/firebase/firebaseConfig';
 interface Setting{
-    roles: Role[];
+    roles: GroupedRoles[];
     mode: number;
     count: number;
 }
@@ -71,7 +73,7 @@ export default defineComponent({
     },
     setup() {
         const database = getDatabase(firebaseApp);
-        const dataRef = dbRef(database, "your-data-path");
+        const dataRef = firebaseRef(database, "your-data-path");
         // const data = useDatabase(dataRef);
         const router = useRouter();
         const store = useStore();
@@ -188,7 +190,6 @@ export default defineComponent({
         }
         function popUpAlertModal() {
             modalShow.value = true;
-            console.log(modalShow);
         }
         function submitSetting() {
             const gameMode = script[selectedModeId.value];
