@@ -7,7 +7,7 @@
 <script lang="ts">
 import _ from 'lodash';
 import NavigationSidebar from '@/components/common/NavigationSidebar.vue'
-import GameConfigurationSection from '@/components/GameConfigurationSection.vue'
+import GameConfigurationSection from '@/components/common/GameConfigurationSection.vue'
 import Role from '@/interfaces/RoleInterface';
 import Config from '@/interfaces/ConfigInterface';
 import {  ref,computed,defineComponent,onMounted,onBeforeUnmount,PropType } from 'vue'
