@@ -1,9 +1,9 @@
 <template lang="pug">
 .wrap.position-relative
-    Header
+    MainHeader
     SettingPanel(@submit='submitSetting' @alert='popUpAlertModal')
     FooterCopyright.position-absolute.bottom-0.start-0
-    Alert(:show='modalShow' @update:modalShow="modalShow = $event")
+    CustomAlert(:show='modalShow' @update:modalShow="modalShow = $event")
 </template>
 <script lang="ts">
 //TODO:"your-data-path"
@@ -13,10 +13,10 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import { ref, computed, watch, defineComponent } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import Header from "@/components/setting/Header.vue";
+import MainHeader from "@/components/setting/MainHeader.vue";
 import SettingPanel from "@/components/setting/SettingPanel.vue";
 import FooterCopyright from "@/components/setting/FooterCopyright.vue";
-import Alert from "@/components/setting/Alert.vue";
+import CustomAlert from "@/components/setting/CustomAlert.vue";
 import { getDatabase, ref as firebaseRef, push } from "firebase/database";
 import firebaseApp from '@/firebase/firebaseConfig';
 import Setting from "@/interfaces/SettingInterface";
@@ -27,17 +27,19 @@ export default defineComponent({
     components: {
         FooterCopyright,
         SettingPanel,
-        Alert,
-        Header
+        CustomAlert,
+        MainHeader
     },
     setup() {
         const date=dayjs.tz(new Date()).format('YYYY-MM-DD')
         // const data = useDatabase(dataRef);
         const router = useRouter();
         const store = useStore();
-        function submitSetting({ data, gameMode }: { data: Setting; gameMode: GameMode }) {
-            store.dispatch("updateGameSetting", data);
-            sendDataToFirebase(data);
+        function submitSetting({ setting, gameMode }: { setting: Setting; gameMode: GameMode }) {
+            console.log('son',setting);
+            console.log('son',gameMode);
+            store.dispatch("updateGameSetting", setting);
+            sendDataToFirebase(setting);
             router.push({ path: `/game/${gameMode.route}` });
         }
 

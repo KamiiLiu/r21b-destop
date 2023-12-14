@@ -171,6 +171,8 @@ export default defineComponent({
             if (countChecked.value > 20) {
                 emit('alert');
             } else {
+                console.log('son',setting);
+                console.log('son',gameMode);
                 emit('submit',{setting,gameMode});
             }
         }
