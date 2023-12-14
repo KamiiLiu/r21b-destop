@@ -1,13 +1,8 @@
 import { createStore } from 'vuex';
 export default createStore({
   state: {
+    gameRound:0,
     gameSetting:{
-      // gameMode: {
-      //   "text": "normal",
-      //   "label": "一般",
-      // },
-      // count: 20,
-      // roles:[]
   }
   },
   mutations: {

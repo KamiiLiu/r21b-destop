@@ -17,7 +17,7 @@ import { BModal } from 'bootstrap-vue-3'
 import { computed, defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'GameDashboard',
+  name: 'Alert',
   props: {
     show: {
       type: Boolean,
